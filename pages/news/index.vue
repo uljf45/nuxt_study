@@ -1,0 +1,50 @@
+<template>
+  <div class="container">
+    <h1 class="title" @click="refresh">刷新</h1>
+    <div v-for="(item, idx) in list" :key="idx" class="item">
+      <h4>{{item.title}}</h4>
+      <div>
+        {{item.content}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  layout: 'test',
+  middleware: 'userAuth',
+  data () {
+    return {
+      list: []
+    }
+  },
+  async fetch() {
+    // let { data } = await this.$axios({
+    //     method: 'get',
+    //     url: 'http://localhost:3000/news'
+    // })
+    let { data } = await this.$axios.get(
+      'http://localhost:3000/news'
+    )
+    this.list = data
+  },
+  methods: {
+    refresh() {
+      this.$axios.get('/news')
+    }
+  },
+}
+</script>
+
+<style>
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.item h4 {
+  width: 80px;
+  color: #35495e;
+}
+</style>
