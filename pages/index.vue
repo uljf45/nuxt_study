@@ -29,7 +29,10 @@
 
 <script>
 export default {
-  layout: 'test'
+  layout: 'test',
+  async asyncData (ctx) {
+    // console.log(ctx)
+  },
 }
 </script>
 

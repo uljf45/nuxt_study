@@ -14,12 +14,18 @@
 export default {
   layout: 'test',
   middleware: 'userAuth',
+  validate(){
+    console.log('LifeCycle validate news', new Date())
+    return true
+  },
   data () {
     return {
       list: []
     }
   },
   async fetch() {
+    console.log('LifeCycle fetch news', new Date())
+
     // let { data } = await this.$axios({
     //     method: 'get',
     //     url: 'http://localhost:3000/news'
@@ -28,6 +34,15 @@ export default {
       'http://localhost:3000/news'
     )
     this.list = data
+  },
+  activated() {
+    // Call fetch again if last fetch more than 30 sec ago
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch()
+    }
+  },
+  created() {
+    console.log('LifeCycle created news', new Date())
   },
   methods: {
     refresh() {

@@ -1,6 +1,8 @@
 import utils from '~/utils/index'
  
-export default function ({route, req, res, redirect}) {
+export default async function ({route, store, app, req, res, redirect}) {
+  console.log('LifeCycle page middleware', new Date())
+
   let isClient = process.client;
   // let isServer = process.server;
 
@@ -21,6 +23,8 @@ export default function ({route, req, res, redirect}) {
     }
     //需要进行权限判断的页面开头
     if (!token) {
+      const { data } = await app.$axios.get('http://localhost:3000/menus')
+      store.commit('setMenus', data)
       redirect(redirectURL)
     }
   }

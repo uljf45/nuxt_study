@@ -14,7 +14,8 @@ const ipAddress = getIPAddress()
 
 export default {
   env: {
-    IP: ipAddress
+    IP: ipAddress,
+    DOMAIN_NAME: 'http://10.42.7.182:8088'
   },
   publicRuntimeConfig: {
     baseURL: process.env.BASE_API 

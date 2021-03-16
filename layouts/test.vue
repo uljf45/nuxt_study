@@ -2,17 +2,23 @@
   <div class="layout">
     <header>
       <nav>
-        <NuxtLink 
+        <a 
         v-for="(item, idx) in $store.state.menus" 
         :key="idx" 
         class="nav-item" 
         :class="{'active': target == (item.target.slice(1) ? item.target.slice(1) : 'index')}" 
-        :to="item.target">
+        :to="'' + item.target"
+        :href="$store.state.domainName + item.target"
+        @click.prevent="goTo(item)"  
+        >
           {{ item.name }}
-        </NuxtLink>
+        </a>
       </nav>
     </header>
     <Nuxt />
+    <footer class="test-footer">
+      render on --- {{renderedOn}}
+    </footer>
   </div>
 </template>
 
@@ -31,17 +37,28 @@ export default {
         // {name: '设置', target: '/setting',  vif: 'isLogin' },
         // {name: '登录', target: '/login',    vif: 'notLogin'},
         // {name: '注册', target: '/register', vif: 'notLogin'},
-      ]
+      ],
+      renderedOn: ''
     }
+  },
+  fetch () {
+    let renderedOn = process.client ? 'client' : 'server'
+    this.renderedOn = renderedOn
   },
   watch: {
     $route (newv, oldv) {
-      this.target = this.$route.name.split('-')[0]  
+      this.target = this.$route.name.split('-')[0]
+      this.$fetch()
     }
   },
   created () {
     this.target = this.$route.name.split('-')[0]
   },
+  methods: {
+    goTo(item) {
+      this.$router.push(item.target)
+    }
+  }
 }
 </script>
 
@@ -70,6 +87,12 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .button--green {
@@ -117,4 +140,13 @@ html {
    color: #00c58e;
 }
 
+.test-footer {
+  margin-top: 10px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
 </style>

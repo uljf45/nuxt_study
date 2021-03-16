@@ -20,6 +20,8 @@ function getCookie (name, strCookie = "") {
 }
 
 export default function({req, res, $axios}) {
+  console.log('LifeCycle global route middleware', new Date())
+
   if (req && req.headers !== undefined) {
     let cookieArr = req.headers.cookie
 

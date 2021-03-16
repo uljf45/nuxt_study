@@ -73,12 +73,4 @@ export default {
 .item .right {
   flex: 1;
 }
-.btn {
-  display: inline-block;
-  padding: 8px 2px;
-  cursor: pointer;
-}
-.btn:hover {
-  color: #315efb;
-}
 </style>
