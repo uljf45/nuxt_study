@@ -58,9 +58,20 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/style-resources', // 导入模块
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios'
   ],
+
+  /*
+  ** Sass module
+  */
+  styleResources: {
+    // your settings here
+    scss: [
+        '~assets/sass/variables.scss',
+    ], // alternative: scss
+  },
 
   router: {
     middleware: 'axiosMiddle'

@@ -6,6 +6,9 @@ export const state = () => ({
   nuxtIp: '',
   contextFromNuxtServerInit: '',
   domainName: '',
+  options: {
+    flow: 'vertical',
+  }
 })
 
 export const mutations = {

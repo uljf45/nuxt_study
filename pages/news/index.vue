@@ -11,9 +11,10 @@
 </template>
 
 <script>
+
 export default {
   layout: 'test',
-  middleware: 'userAuth',
+  // middleware: 'userAuth',
   validate(){
     console.log('LifeCycle validate news', new Date())
     return true
@@ -52,14 +53,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '/assets/sass/layout.scss';
+
+.container {
+  position: relative;
+  .title {
+    @include abs-center;
+  }
+}
 .item {
   display: flex;
   flex-direction: row;
   align-items: center;
+  @include flex-center-horizontal;
+  h4 {
+    width: 80px;
+    color: $color-primary;
+  }
 }
-.item h4 {
-  width: 80px;
-  color: #35495e;
-}
+
 </style>
