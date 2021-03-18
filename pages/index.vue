@@ -133,6 +133,7 @@ export default {
   flex-direction: row;
   width: 100%;
   height: 400px;
+  overflow-x: hidden;
   &-left {
     flex: 1;
     background: lightcoral;

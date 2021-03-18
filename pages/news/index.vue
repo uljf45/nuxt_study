@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="title" @click="refresh">刷新</h1>
+    <div id="chart-container"></div>
+    <h1 class="title btn" @click="refresh">刷新</h1>
     <div v-for="(item, idx) in list" :key="idx" class="item">
       <h4>{{item.title}}</h4>
       <div>
@@ -11,6 +12,24 @@
 </template>
 
 <script>
+// import * as echarts from 'echarts/core.js';
+// import {
+//   LineChart
+// } from 'echarts/charts'
+
+// import {
+//   TitleComponent,
+//   TooltipComponent,
+//   GridComponent
+// } from 'echarts/components'
+
+// import {
+//   CanvasRenderer
+// } from 'echarts/renderers'
+
+// echarts.use(
+//   [TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
+// )
 
 export default {
   layout: 'test',
@@ -45,7 +64,32 @@ export default {
   created() {
     console.log('LifeCycle created news', new Date())
   },
+  mounted () {
+    if (process.client) this.initChart()
+  },
   methods: {
+    initChart() {
+      var chartDom = document.getElementById('chart-container')
+      var myChart = this.$echarts.init(chartDom)
+      var option = {
+         xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true,
+          areaStyle: {}
+        }]
+      }
+
+      myChart.setOption(option)
+    },
     refresh() {
       this.$axios.get('/news')
     }
@@ -62,6 +106,12 @@ export default {
     @include abs-center;
   }
 }
+
+#chart-container {
+  width: 600px;
+  height: 300px;
+}
+
 .item {
   display: flex;
   flex-direction: row;
