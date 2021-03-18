@@ -72,19 +72,76 @@ export default {
       var chartDom = document.getElementById('chart-container')
       var myChart = this.$echarts.init(chartDom)
       var option = {
+        grid: {
+          top: 28,
+          left: 92,
+          right: 40,
+          bottom: 56,
+        },
          xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLabel: {
+            textStyle: {
+              color: '#666'
+            }
+          },
+          splitLine: {
+            show:true,
+            lineStyle: {
+              color: ['#e7e8eb']
+            }
+          },
+          axisLine: {
+            show: true,
+            symbol: 'none',
+            lineStyle: {
+              color: '#979696'
+            },
+            
+          },
+          axisTick: {
+            show: false
+          }
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          splitLine: {
+            lineStyle: {
+              color: ['#e7e8eb']
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#666'
+            }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#979696'
+            }
+          }
         },
         series: [{
           data: [820, 932, 901, 934, 1290, 1330, 1320],
           type: 'line',
+          symbol: 'none',
+          clip: true,
           smooth: true,
-          areaStyle: {}
+          itemStyle: {
+              color: '#EC0500'
+          },
+          areaStyle: {
+            color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(236, 5, 0, 0.3)'
+            }, {
+                offset: 1,
+                color: 'rgba(255, 255, 255, 0.3)'
+            }])
+          }
         }]
       }
 
@@ -103,13 +160,13 @@ export default {
 .container {
   position: relative;
   .title {
-    @include abs-center;
+    // @include abs-center;
   }
 }
 
 #chart-container {
-  width: 600px;
-  height: 300px;
+  width: 620px;
+  height: 360px;
 }
 
 .item {

@@ -7,7 +7,8 @@ import {
 import {
   TitleComponent,
   TooltipComponent,
-  GridComponent
+  GridComponent,
+  VisualMapComponent,
 } from 'echarts/components'
 
 import {
@@ -15,7 +16,7 @@ import {
 } from 'echarts/renderers'
 
 echarts.use(
-  [TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
+  [TitleComponent, VisualMapComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
 )
 
 Vue.prototype.$echarts = echarts
